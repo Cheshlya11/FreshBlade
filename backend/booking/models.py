@@ -4,7 +4,7 @@ from accounts.models import User, Master
 from catalog.models import Service
 
 
-class MasterSchedules(models.Model):
+class MasterSchedule(models.Model):
     class Weekday(models.IntegerChoices):
         MON = (
             1,
