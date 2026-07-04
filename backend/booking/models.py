@@ -50,6 +50,9 @@ class MasterSchedule(models.Model):
             ),
         ]
 
+    def __str__(self):
+        return f"{self.master} - {self.get_weekday_display()} {self.start_time}-{self.end_time}"
+
 
 class Appointment(models.Model):
     class Status(models.TextChoices):
@@ -83,3 +86,6 @@ class Appointment(models.Model):
                 name="chk_appointments_time",
             ),
         ]
+
+    def __str__(self):
+        return f"{self.client} → {self.master} ({self.service}) {self.start_at:%Y-%m-%d %H:%M}"
