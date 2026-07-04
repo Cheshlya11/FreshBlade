@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import MasterSchedule, Appointment
 
-# Register your models here.
+admin.site.register(MasterSchedule)
+admin.site.register(Appointment)
