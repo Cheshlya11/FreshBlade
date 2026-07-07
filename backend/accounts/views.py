@@ -6,7 +6,7 @@ from .forms import ClientRegistrationForm
 
 
 def home_view(request):
-    return render(request, "accounts/home.html")
+    return render(request, "home.html")
 
 
 def register_view(request):
