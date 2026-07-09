@@ -1,0 +1,59 @@
+.auth-card {
+  display: flex;
+  width: 100%;
+  max-width: 780px;
+  max-height: 75vh;
+  background: var(--surface);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.auth-card__side {
+  width: 36%;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--crimson) 0px,
+    var(--crimson) 14px,
+    var(--text) 14px,
+    var(--text) 28px,
+    var(--navy) 28px,
+    var(--navy) 42px
+  );
+  display: none;
+  flex-shrink: 0;
+}
+
+.auth-card__form {
+  flex: 1;
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row p {
+  margin: 0 0 0rem;
+}
+
+.switch-link {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.switch-link a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+@media (min-width: 640px) {
+  .auth-card__side {
+    display: block;
+  }
+}
