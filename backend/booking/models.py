@@ -1,5 +1,5 @@
-# booking/models.py
 from django.db import models
+from django.utils import timezone
 
 from accounts.models import User, Master
 from catalog.models import Service
@@ -68,7 +68,8 @@ class Appointment(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.client} → {self.master} {self.start_at:%Y-%m-%d %H:%M}"
+        local_time = timezone.localtime(self.start_at)
+        return f"{self.client} → {self.master} {local_time:%Y-%m-%d %H:%M}"
 
 
 class AppointmentService(models.Model):
