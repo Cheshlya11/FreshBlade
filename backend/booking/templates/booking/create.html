@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/booking.css' %}">
+{% endblock %}
+{% block title %}Book an appointment — FreshBlade{% endblock %}
+{% block content %}
+<div class="booking-card">
+    <h1>Book your visit</h1>
+
+    {% if form.non_field_errors %}
+    <div class="form-errors">
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" id="booking-form">
+        {% csrf_token %}
+
+        <h3>Services</h3>
+        <div class="service-picker">
+            {% for choice in form.services %}
+            <label class="service-pill">
+                {{ choice.tag }}
+                <span>{{ choice.choice_label }}</span>
+            </label>
+            {% endfor %}
+        </div>
+        {{ form.services.errors }}
+
+        <h3>Master</h3>
+        <p class="{% if form.master.errors %}has-error{% endif %}">
+            {{ form.master }}
+            {{ form.master.errors }}
+        </p>
+
+        <h3>Date</h3>
+        <input type="date" id="date-picker" min="{{ today|date:'Y-m-d' }}">
+
+        <h3>Available times</h3>
+        <div id="slots-container" class="slots-container">
+            <p class="subtitle">Select a master and a date first.</p>
+        </div>
+
+        <input type="hidden" name="start_at" id="start_at" value="{{ form.start_at.value|default:'' }}">
+        {{ form.start_at.errors }}
+
+        <div class="booking-summary">
+            <span class="booking-summary__duration"><span id="total-duration">0</span> min</span>
+            <span class="booking-summary__price"><span id="total-price">0</span>€</span>
+        </div>
+
+        <button type="submit">Confirm booking</button>
+    </form>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/booking.js' %}"></script>
+{% endblock %}
