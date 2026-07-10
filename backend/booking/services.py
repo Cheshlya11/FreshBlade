@@ -1,7 +1,10 @@
 from datetime import timedelta
 from django.utils import timezone
 
-from .models import MasterSchedule, Appointment
+from django.core.exceptions import ValidationError
+from django.db import transaction
+
+from .models import MasterSchedule, Appointment, AppointmentService
 
 
 def get_available_slots(master, date, duration_minutes, step_minutes=30):
@@ -42,3 +45,24 @@ def get_available_slots(master, date, duration_minutes, step_minutes=30):
         current_start += step
 
     return available_slots
+
+
+def is_slot_still_available(master, start_at, end_at):
+    slots = get_available_slots(master, start_at.date(), int((end_at - start_at).total_seconds() // 60))
+    return any(s == start_at for s, e in slots)
+
+
+@transaction.atomic
+def create_appointment(client, master, service_list, start_at):
+    total_duration = sum(s.duration_minutes for s in service_list)
+    end_at = start_at + timedelta(minutes=total_duration)
+
+    if not is_slot_still_available(master, start_at, end_at):
+        raise ValidationError("This time is no longer available")
+
+    appointment = Appointment.objects.create(client=client, master=master, start_at=start_at, end_at=end_at)
+    for service in service_list:
+        AppointmentService.objects.create(
+            appointment=appointment, service=service, price_at_booking=service.base_price
+        )
+    return appointment
