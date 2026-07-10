@@ -23,13 +23,15 @@ class ServiceCheckboxSelect(forms.CheckboxSelectMultiple):
 
 class AppointmentForm(forms.Form):
     services = forms.ModelMultipleChoiceField(
-        queryset=Service.objects.filter(is_active=True).annotate(
+        queryset=Service.objects.filter(is_active=True)
+        .annotate(
             sort_order=Case(
                 When(category="haircut", then=Value(0)),
                 default=Value(1),
                 output_field=IntegerField(),
             )
-        ).order_by("sort_order", "name"),
+        )
+        .order_by("sort_order", "name"),
         widget=ServiceCheckboxSelect,
     )
     master = forms.ModelChoiceField(
@@ -50,3 +52,30 @@ class AppointmentForm(forms.Form):
             )
 
         return services
+
+
+class AppointmentFilterForm(forms.Form):
+    STATUS_CHOICES = [
+        ("CONFIRMED", "Confirmed"),
+        ("COMPLETED", "Past"),
+        ("CANCELLED", "Cancelled"),
+    ]
+
+    status = forms.ChoiceField(
+        choices=STATUS_CHOICES, required=False, initial="CONFIRMED"
+    )
+    master = forms.ModelChoiceField(
+        queryset=Master.objects.filter(is_active=True), required=False
+    )
+    search = forms.CharField(required=False)
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if user.role == "MASTER":
+            del self.fields["master"]
+        elif user.role == "CLIENT":
+            del self.fields["search"]
+
+        if user.is_staff:
+            pass
