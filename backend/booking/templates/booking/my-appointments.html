@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Appointments — FreshBlade{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my-appointments.css' %}">
+{% endblock %}
+{% block content %}
+<div class="appointments-page">
+    <h1>My Appointments</h1>
+
+    <div class="filter-bar">
+        <div class="filter-bar__top">
+            <div class="filter-tabs">
+                <a href="?status=CONFIRMED" class="{% if status == 'CONFIRMED' %}filter-tab--active{% endif %}">Confirmed</a>
+                <a href="?status=COMPLETED" class="{% if status == 'COMPLETED' %}filter-tab--active{% endif %}">Past</a>
+                <a href="?status=CANCELLED" class="{% if status == 'CANCELLED' %}filter-tab--active{% endif %}">Cancelled</a>
+            </div>
+
+            {% if user.role == "MASTER" and status == "CONFIRMED" and has_completable %}
+            <form method="post" action="{% url 'booking:complete_all' %}" class="complete-all-form" onsubmit="return confirm('Mark all past confirmed appointments as completed?')">
+                {% csrf_token %}
+                <button type="submit" class="nav-link--accent-button">Mark all as completed</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <form method="get" class="filter-form">
+            <input type="hidden" name="status" value="{{ status }}">
+
+            {% if "master" in form.fields %}
+            <label class="filter-date-label">
+                Master
+                {{ form.master}}
+            </label>
+            {% endif %}
+
+            {% if "search" in form.fields %}
+            <label class="filter-date-label">
+                Search
+                {{ form.search }}
+            </label>
+            {% endif %}
+
+            <label class="filter-date-label">
+                From
+                {{ form.date_from }}
+            </label>
+            <label class="filter-date-label">
+                To
+                {{ form.date_to }}
+            </label>
+
+            <label class="filter-date-label">
+                <span class="filter-date-label__spacer">&nbsp;</span>
+                <button type="submit">Apply</button>
+            </label>
+        </form>
+    </div>
+
+    <div class="appointments-list">
+        {% for appointment in page_obj %}
+        <div class="appointment-card">
+            <div class="appointment-card__header">
+                <span class="appointment-card__time">
+                    {{ appointment.start_at|date:"d M Y" }} · {{ appointment.start_at|date:"H:i" }} – {{ appointment.end_at|date:"H:i" }}
+                </span>
+                <span class="appointment-card__price">{{ appointment.total_price }}€</span>
+            </div>
+
+            {% if user.role == "MASTER" %}
+            <p class="appointment-card__person">{{ appointment.client.get_full_name }}</p>
+            <p class="appointment-card__meta">{{ appointment.client.email }}</p>
+            {% else %}
+            <p class="appointment-card__person">{{ appointment.master }}</p>
+            <p class="appointment-card__meta">{{ appointment.master.user.email }}</p>
+            {% endif %}
+
+            <div class="appointment-card__services">
+                {% for service in appointment.services.all %}
+                <span class="service-tag">{{ service.name }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="appointment-card__actions">
+                {% if user.role == "MASTER" and appointment.can_complete %}
+                <form method="post" action="{% url 'booking:complete' appointment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Completed</button>
+                </form>
+                {% endif %}
+                {% if status == "CONFIRMED" %}
+                <form method="post" action="{% url 'booking:cancel' appointment.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cancel-button">Cancel</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p class="empty-state__title">
+                {% if status == "CONFIRMED" %}No upcoming appointments{% elif status == "COMPLETED" %}No past appointments{% else %}No cancelled appointments{% endif %}
+            </p>
+            <p class="empty-state__hint">
+                {% if user.role == "MASTER" %}
+                    Appointments booked with you will show up here.
+                {% elif status == "CONFIRMED" %}
+                    Ready for a fresh cut? <a href="{% url 'booking:create' %}">Book your visit</a>.
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?{{ query_params }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+        <a href="?{{ query_params }}&page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

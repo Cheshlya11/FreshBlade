@@ -1,0 +1,255 @@
+.appointments-page {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.filter-bar__top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 2rem;
+}
+
+.filter-date-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.filter-date-label__spacer {
+  visibility: hidden;
+}
+
+.filter-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0rem;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-tabs a {
+  color: var(--text-dim);
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+}
+
+.filter-tab--active {
+  color: var(--gold);
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid transparent;
+}
+
+.filter-tab--active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.filter-form select,
+.filter-form input {
+  width: auto;
+  height: 44px;
+  min-width: 180px;
+}
+
+.filter-form select {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a79e93' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.filter-form input[type="date"] {
+  min-width: 140px;
+}
+
+.filter-form select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.filter-form button {
+  width: auto;
+  height: 44px;
+  padding: 0.65rem 1.5rem;
+  margin-top: 0;
+}
+
+.complete-all-form {
+  margin: 0;
+}
+
+.nav-link--accent-button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  width: auto;
+  padding: 0 0 0.3rem;
+  margin-top: 0;
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  line-height: normal;
+}
+.appointments-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.appointment-card {
+  flex: 1 1 calc(33.333% - 0.67rem);
+  max-width: calc(33.333% - 0.67rem);
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+}
+
+.appointment-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--surface-line);
+}
+
+.appointment-card__time {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.appointment-card__price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.appointment-card__person {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+}
+
+.appointment-card__meta {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 0 0 0.8rem;
+}
+
+.appointment-card__services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-tag {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  background: var(--bg);
+  border: 1px solid var(--surface-line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.appointment-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.3rem;
+}
+
+.appointment-card__actions form {
+  flex: 1;
+}
+
+.appointment-card__actions button {
+  width: 100%;
+}
+
+.cancel-button {
+  background: transparent;
+  border: 1px solid var(--crimson);
+  color: var(--crimson);
+}
+
+.cancel-button:hover {
+  background: var(--crimson);
+  color: var(--text);
+}
+
+.empty-state {
+  padding: 4rem 3rem;
+  min-height: 200px;
+  min-width: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border: 1px dashed var(--surface-line);
+  border-radius: var(--radius);
+}
+
+.empty-state__title {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 0.4rem;
+}
+
+.empty-state__hint {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.empty-state__hint a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.pagination {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0 0 1rem;
+  color: var(--text-dim);
+}
+
+.pagination a {
+  color: var(--gold);
+  text-decoration: none;
+}
