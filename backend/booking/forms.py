@@ -69,6 +69,9 @@ class AppointmentFilterForm(forms.Form):
     )
     search = forms.CharField(required=False)
 
+    date_from = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
+    date_to = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
+    
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
