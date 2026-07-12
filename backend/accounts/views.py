@@ -5,10 +5,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import ClientRegistrationForm
 
 
-def home_view(request):
-    return render(request, "home.html")
-
-
 def register_view(request):
     if request.method == "POST":
         form = ClientRegistrationForm(request.POST)
@@ -17,7 +13,7 @@ def register_view(request):
             user.role = user.Role.CLIENT
             user.save()
             auth_login(request, user)
-            return redirect("home")
+            return redirect("pages:home")
         return render(request, "accounts/register.html", {"form": form})
 
     return render(request, "accounts/register.html", {"form": ClientRegistrationForm()})
@@ -28,7 +24,7 @@ def login_view(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect("home")
+            return redirect("pages:home")
         return render(request, "accounts/login.html", {"form": form})
 
     return render(request, "accounts/login.html", {"form": AuthenticationForm})
@@ -36,4 +32,4 @@ def login_view(request):
 
 def logout_view(request):
     auth_logout(request)
-    return redirect("home")
+    return redirect("accounts:login")

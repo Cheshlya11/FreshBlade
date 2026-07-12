@@ -1,0 +1,287 @@
+.page-flow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  padding: 5rem 2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--surface) 0px,
+    var(--surface) 60px,
+    var(--surface-line) 60px,
+    var(--surface-line) 62px
+  );
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.hero__stripes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0px,
+    transparent 200px,
+    var(--crimson) 200px,
+    var(--crimson) 206px,
+    transparent 206px,
+    transparent 260px,
+    var(--navy) 260px,
+    var(--navy) 266px
+  );
+  opacity: 0.35;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  text-align: center;
+}
+
+.hero__eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 1rem;
+}
+
+.hero__title {
+  font-family: "Fraunces", serif;
+  font-size: 3rem;
+  line-height: 1.15;
+  margin: 0 0 1.2rem;
+}
+
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin: 0 0 2.2rem;
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero__cta {
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero__cta--primary {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.hero__cta--primary:hover {
+  filter: brightness(1.08);
+}
+
+.hero__cta--secondary {
+  border: 1px solid var(--surface-line);
+  color: var(--text);
+}
+
+.hero__cta--secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.about {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.about__intro {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.about__intro h2 {
+  font-family: "Fraunces", serif;
+  font-size: 1.8rem;
+  margin: 0 0 1rem;
+}
+
+.about__intro p {
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.about__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.about__item {
+  flex: 1 1 calc(33.333% - 1.34rem);
+  max-width: calc(33.333% - 1.34rem);
+  min-width: 220px;
+}
+
+.about__item h3 {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+
+.about__item p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.home-services {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.home-services__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.home-services__header h2 {
+  font-family: "Fraunces", serif;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.home-services__link {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.home-services__link:hover {
+  text-decoration: underline;
+}
+
+.home-services__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.service-card--compact {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  min-width: 260px;
+}
+
+.service-card--compact .service-card__image {
+  height: 220px;
+}
+
+.service-card--compact .service-card__body {
+  padding: 1rem 1.2rem;
+}
+
+.service-card--compact h3 {
+  font-family: "Fraunces", serif;
+  font-size: 1rem;
+  margin: 0 0 0.4rem;
+}
+
+.service-card--compact .service-card__description {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.home-masters {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.home-masters__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.home-masters__header h2 {
+  font-family: "Fraunces", serif;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.home-masters__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.master-card--compact {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  min-width: 220px;
+}
+
+.master-card--compact .master-card__image {
+  aspect-ratio: 4 / 5;
+}
+
+.master-card--compact .master-card__body {
+  padding: 1rem 1.2rem;
+}
+
+.master-card--compact h3 {
+  font-size: 1rem;
+}
+
+.master-card--compact .master-card__bio {
+  font-size: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .hero__title {
+    font-size: 2.2rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+}
