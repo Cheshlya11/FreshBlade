@@ -18,11 +18,15 @@
       <div class="pole"></div>
       <span class="brand">FreshBlade</span>
       <nav class="nav-auth">
-        {% if user.is_authenticated %}
-          {% if not user.is_staff %}
-          <a href="{% url 'booking:my_appointments' %}" class="nav-link">My Appointments</a>
-          <a href="{% url 'booking:create' %}" class="nav-link nav-link--accent">Book now</a>
-          {% endif %}
+        <a href="{% url 'catalog:service_list' %}" class="nav-link">Services</a>
+        {% if user.is_authenticated %} {% if not user.is_staff %}
+        <a href="{% url 'booking:my_appointments' %}" class="nav-link"
+          >My Appointments</a
+        >
+        <a href="{% url 'booking:create' %}" class="nav-link nav-link--accent"
+          >Book now</a
+        >
+        {% endif %}
         <span class="nav-user"
           >{{ user.get_full_name|default:user.email }}</span
         >
