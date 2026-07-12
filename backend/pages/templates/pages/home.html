@@ -3,6 +3,7 @@
 {% block title %}FreshBlade{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
 {% endblock %}
 {% block content %}
 <div class="page-flow">
@@ -45,6 +46,26 @@
                 <h3>Built for the long run</h3>
                 <p>We care more about a client who keeps coming back than a one-off appointment.</p>
             </div>
+        </div>
+    </section>
+    <section class="home-services">
+        <div class="home-services__header">
+            <h2>Our Services</h2>
+            <a href="{% url 'catalog:service_list' %}" class="home-services__link">See all services →</a>
+        </div>
+
+        <div class="home-services__grid">
+            {% for service in top_services %}
+            <div class="service-card service-card--compact">
+                {% if service.photo %}
+                <img src="{{ service.photo }}" alt="{{ service.name }}" class="service-card__image">
+                {% endif %}
+                <div class="service-card__body">
+                    <h3>{{ service.name }}</h3>
+                    <p class="service-card__description">{{ service.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </section>
 </div>
