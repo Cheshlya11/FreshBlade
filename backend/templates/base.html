@@ -46,6 +46,35 @@
         </nav>
     </header>
     <main>{% block content %}{% endblock %}</main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="pole"></div>
+                <span class="brand">FreshBlade</span>
+            </div>
+
+            <nav class="footer-links">
+                <a href="{% url 'catalog:service_list' %}">Services</a>
+                <a href="{% url 'catalog:master_list' %}">Masters</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'booking:my_appointments' %}">My Appointments</a>
+                <a href="{% url 'booking:create' %}">Book now</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}">Log in</a>
+                {% endif %}
+            </nav>
+        </div>
+
+        <div class="footer-meta">
+            <span>123 Bahnhofstraße, 86150 Augsburg, Germany</span>
+            <span class="footer-meta__divider">|</span>
+            <span>contact@freshblade.de</span>
+            <span class="footer-meta__divider">|</span>
+            <span>+49 89 5555 2401</span>
+        </div>
+
+        <p class="footer-copyright">© 2026 FreshBlade Barbershop. All rights reserved.</p>
+    </footer>
     {% block extra_js %}{% endblock %}
   </body>
 </html>
