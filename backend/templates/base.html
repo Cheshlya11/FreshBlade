@@ -19,6 +19,7 @@
       <span class="brand">FreshBlade</span>
       <nav class="nav-auth">
         <a href="{% url 'catalog:service_list' %}" class="nav-link">Services</a>
+        <a href="{% url 'catalog:master_list' %}" class="nav-link">Masters</a>
         {% if user.is_authenticated %} {% if not user.is_staff %}
         <a href="{% url 'booking:my_appointments' %}" class="nav-link"
           >My Appointments</a
