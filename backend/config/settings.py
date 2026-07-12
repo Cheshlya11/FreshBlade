@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "catalog",
     "booking",
     "reports",
+    "pages",
 ]
 
 MIDDLEWARE = [

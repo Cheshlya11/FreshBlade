@@ -65,7 +65,7 @@ def booking_create_view(request):
                 service_list=form.cleaned_data["services"],
                 start_at=form.cleaned_data["start_at"],
             )
-            return redirect("home")
+            return redirect("pages:home")
         return render(request, "booking/create.html", {"form": form, "today": today})
 
     preselected_service = request.GET.get("service")
