@@ -29,8 +29,8 @@ header {
   border-bottom: 1px solid var(--surface-line);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 .pole {
@@ -55,11 +55,39 @@ header {
   letter-spacing: 0.02em;
 }
 
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .nav-auth {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-left: auto;
+}
+
+.nav-link--cta {
+  padding: 0.5rem 1.1rem;
+  background: var(--gold);
+  color: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-link--cta:hover {
+  filter: brightness(1.08);
 }
 
 .nav-user {
@@ -71,10 +99,6 @@ header {
   font-size: 0.85rem;
   color: var(--text-dim);
   text-decoration: none;
-}
-
-.nav-link--accent {
-  color: var(--gold);
 }
 
 .logout-form {

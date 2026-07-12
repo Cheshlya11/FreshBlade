@@ -15,41 +15,35 @@
   </head>
   <body>
     <header>
-      <div class="pole"></div>
-      <span class="brand">FreshBlade</span>
-      <nav class="nav-auth">
-        <a href="{% url 'catalog:service_list' %}" class="nav-link">Services</a>
-        <a href="{% url 'catalog:master_list' %}" class="nav-link">Masters</a>
-        {% if user.is_authenticated %} {% if not user.is_staff %}
-        <a href="{% url 'booking:my_appointments' %}" class="nav-link"
-          >My Appointments</a
-        >
-        <a href="{% url 'booking:create' %}" class="nav-link nav-link--accent"
-          >Book now</a
-        >
-        {% endif %}
-        <span class="nav-user"
-          >{{ user.get_full_name|default:user.email }}</span
-        >
-        <form
-          method="post"
-          action="{% url 'accounts:logout' %}"
-          class="logout-form"
-        >
-          {% csrf_token %}
-          <button type="submit" class="nav-link nav-link--button">
-            Log out
-          </button>
-        </form>
-        {% else %}
-        <a href="{% url 'accounts:login' %}" class="nav-link">Log in</a>
-        <a
-          href="{% url 'accounts:register' %}"
-          class="nav-link nav-link--accent"
-          >Register</a
-        >
-        {% endif %}
-      </nav>
+        <a href="{% url 'home' %}" class="brand-link">
+            <div class="pole"></div>
+            <span class="brand">FreshBlade</span>
+        </a>
+
+        <nav class="nav-main">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'catalog:service_list' %}" class="nav-link">Services</a>
+            <a href="{% url 'catalog:master_list' %}" class="nav-link">Masters</a>
+            {% if user.is_authenticated and not user.is_staff %}
+            <a href="{% url 'booking:my_appointments' %}" class="nav-link">My Appointments</a>
+            {% endif %}
+        </nav>
+
+        <nav class="nav-auth">
+            {% if user.is_authenticated %}
+                {% if not user.is_staff %}
+                <a href="{% url 'booking:create' %}" class="nav-link--cta">Book now</a>
+                {% endif %}
+                <span class="nav-user">{{ user.get_full_name|default:user.email }}</span>
+                <form method="post" action="{% url 'accounts:logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link nav-link--button">Log out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="nav-link">Log in</a>
+                <a href="{% url 'accounts:register' %}" class="nav-link--cta">Register</a>
+            {% endif %}
+        </nav>
     </header>
     <main>{% block content %}{% endblock %}</main>
     {% block extra_js %}{% endblock %}
