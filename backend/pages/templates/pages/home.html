@@ -4,6 +4,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/services.css' %}">
+<link rel="stylesheet" href="{% static 'css/masters.css' %}">
 {% endblock %}
 {% block content %}
 <div class="page-flow">
@@ -63,6 +64,26 @@
                 <div class="service-card__body">
                     <h3>{{ service.name }}</h3>
                     <p class="service-card__description">{{ service.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="home-masters">
+        <div class="home-masters__header">
+            <h2>Our Masters</h2>
+            <a href="{% url 'catalog:master_list' %}" class="home-services__link">See all masters →</a>
+        </div>
+
+        <div class="home-masters__grid">
+            {% for master in top_masters %}
+            <div class="master-card master-card--compact">
+                {% if master.photo %}
+                <img src="{{ master.photo }}" alt="{{ master.user.get_full_name }}" class="master-card__image">
+                {% endif %}
+                <div class="master-card__body">
+                    <h3>{{ master.user.get_full_name }}</h3>
+                    <p class="master-card__bio">{{ master.short_description }}</p>
                 </div>
             </div>
             {% endfor %}
