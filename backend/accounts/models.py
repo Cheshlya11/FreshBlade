@@ -41,7 +41,7 @@ class Master(models.Model):
     )
     bio = models.TextField(blank=True)
     short_description = models.CharField(max_length=255, blank=True)
-    expirience_years = models.PositiveIntegerField(default=0)
+    experience_years = models.PositiveIntegerField(default=0)
     photo = models.URLField(blank=True)
     is_active = models.BooleanField(default=True)
 
