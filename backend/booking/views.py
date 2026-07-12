@@ -69,15 +69,16 @@ def booking_create_view(request):
         return render(request, "booking/create.html", {"form": form, "today": today})
 
     preselected_service = request.GET.get("service")
+    preselected_master = request.GET.get("master")
+
     initial = {}
     if preselected_service:
         initial["services"] = [preselected_service]
+    if preselected_master:
+        initial["master"] = preselected_master
 
-    return render(
-        request,
-        "booking/create.html",
-        {"form": AppointmentForm(initial=initial), "today": today},
-    )
+    form = AppointmentForm(initial=initial)
+    return render(request, "booking/create.html", {"form": form, "today": today})
 
 
 @login_required
