@@ -5,24 +5,47 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block content %}
-<section class="hero">
-    <div class="hero__stripes"></div>
-    <div class="hero__content">
-        {% if user.is_authenticated %}
-        <p class="hero__eyebrow">Welcome back, {{ user.get_full_name|default:user.email }}</p>
-        {% else %}
-        <p class="hero__eyebrow">Augsburg's modern barbershop</p>
-        {% endif %}
-        <h1 class="hero__title">Sharp cuts.<br>Honest craft.</h1>
-        <p class="hero__subtitle">Classic barbering with a modern edge — book your seat in under a minute.</p>
-        <div class="hero__actions">
+<div class="page-flow">
+    <section class="hero">
+        <div class="hero__stripes"></div>
+        <div class="hero__content">
             {% if user.is_authenticated %}
-            <a href="{% url 'booking:create' %}" class="hero__cta hero__cta--primary">Book now</a>
+            <p class="hero__eyebrow">Welcome back, {{ user.get_full_name|default:user.email }}</p>
             {% else %}
-            <a href="{% url 'accounts:login' %}" class="hero__cta hero__cta--primary">Book now</a>
+            <p class="hero__eyebrow">Augsburg's modern barbershop</p>
             {% endif %}
-            <a href="{% url 'catalog:service_list' %}" class="hero__cta hero__cta--secondary">View services</a>
+            <h1 class="hero__title">Sharp cuts.<br>Honest craft.</h1>
+            <p class="hero__subtitle">Classic barbering with a modern edge – book your seat in under a minute.</p>
+            <div class="hero__actions">
+                {% if user.is_authenticated %}
+                <a href="{% url 'booking:create' %}" class="hero__cta hero__cta--primary">Book now</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="hero__cta hero__cta--primary">Book now</a>
+                {% endif %}
+                <a href="{% url 'catalog:service_list' %}" class="hero__cta hero__cta--secondary">View services</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+    <section class="about">
+        <div class="about__intro">
+            <h2>About FreshBlade</h2>
+            <p>Founded in 2021, FreshBlade brings professional barbering to Augsburg in a welcoming, no-rush environment – where a haircut is a moment to reset, not just a routine.</p>
+        </div>
+
+        <div class="about__grid">
+            <div class="about__item">
+                <h3>Experienced team</h3>
+                <p>From classic scissor cuts to modern colouring and restorative treatments, every barber brings their own specialty.</p>
+            </div>
+            <div class="about__item">
+                <h3>Personal consultation</h3>
+                <p>Every visit starts with a short conversation, so the result actually matches what you had in mind.</p>
+            </div>
+            <div class="about__item">
+                <h3>Built for the long run</h3>
+                <p>We care more about a client who keeps coming back than a one-off appointment.</p>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}
