@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ report_title }} — FreshBlade{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/reports.css' %}">
+{% endblock %}
+{% block content %}
+<div class="reports-page">
+    <nav class="reports-nav">
+        <h3 class="reports-nav__heading">Report type</h3>
+        {% for type_key, type_label in report_types.items %}
+        <p>
+            <a href="?type={{ type_key }}&date_from={{ date_from }}&date_to={{ date_to }}" class="{% if type_key == current_type %}reports-nav__link--active{% else %}reports-nav__link{% endif %}">
+                {{ type_label }}
+            </a>
+        </p>
+        {% endfor %}
+    </nav>
+
+    <div class="reports-content">
+        <h1>{{ report_title }}</h1>
+
+        <div class="reports-table-wrapper">
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        {% for column in columns %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        {% for cell in row %}
+                        <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="reports-toolbar">
+            <form method="get" class="reports-date-form">
+                <input type="hidden" name="type" value="{{ current_type }}">
+                <label>From <input type="date" name="date_from" value="{{ date_from }}"></label>
+                <label>To <input type="date" name="date_to" value="{{ date_to }}"></label>
+                <button type="submit">Apply</button>
+                <a href="?type={{ current_type }}" class="reports-date-form__reset">Reset dates</a>
+            </form>
+
+            <form method="get" action="{% url 'reports:report_export' %}" class="reports-export-form">
+                <input type="hidden" name="type" value="{{ current_type }}">
+                <input type="hidden" name="date_from" value="{{ date_from }}">
+                <input type="hidden" name="date_to" value="{{ date_to }}">
+                <select name="format">
+                    <option value="xlsx">Excel (.xlsx)</option>
+                    <option value="csv">CSV (.csv)</option>
+                    <option value="json">JSON (.json)</option>
+                </select>
+                <button type="submit">Export</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
