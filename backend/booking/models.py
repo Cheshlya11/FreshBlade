@@ -39,9 +39,9 @@ class MasterSchedule(models.Model):
 
 class Appointment(models.Model):
     class Status(models.TextChoices):
+        COMPLETED = "COMPLETED", "Completed"
         CONFIRMED = "CONFIRMED", "Confirmed"
         CANCELLED = "CANCELLED", "Cancelled"
-        COMPLETED = "COMPLETED", "Completed"
 
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="client_appointments"
