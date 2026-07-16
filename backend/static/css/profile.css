@@ -115,3 +115,30 @@
   border-color: var(--gold);
   color: var(--gold);
 }
+
+.profile-edit-form {
+  max-width: 500px;
+  margin-top: 2rem;
+}
+
+.profile-edit-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.profile-edit-form__actions button {
+  width: auto;
+  padding: 0.7rem 1.8rem;
+}
+
+.profile-edit-form__cancel {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.profile-edit-form__cancel:hover {
+  color: var(--gold);
+}

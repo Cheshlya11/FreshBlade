@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.forms import AuthenticationForm
 
-from .forms import ClientRegistrationForm
+from .forms import ClientRegistrationForm, ProfileEditForm
 
 
 def register_view(request):
@@ -45,3 +45,19 @@ def profile_view(request):
         "display_role": display_role,
     }
     return render(request, "accounts/profile.html", context)
+
+
+@login_required
+def profile_edit_view(request):
+    if request.method == "POST":
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:profile")
+        return render(request, "accounts/profile_edit.html", {"form": form})
+
+    return render(
+        request,
+        "accounts/profile_edit.html",
+        {"form": ProfileEditForm(instance=request.user)},
+    )
