@@ -227,6 +227,24 @@ ul.errorlist {
   margin: 0 0 1rem;
 }
 
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
 button {
   width: 100%;
   padding: 0.75rem;
