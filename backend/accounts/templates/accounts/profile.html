@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Profile — FreshBlade{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="profile-page">
+    <p class="profile-eyebrow">Account</p>
+    <h1>My Profile</h1>
+    <p class="subtitle">View and manage your account information.</p>
+
+    <div class="profile-card">
+        <div class="profile-card__side">
+            <div class="avatar-circle" style="--avatar-bg: {{ avatar_color }};">
+                {{ avatar_letter }}
+            </div>
+        </div>
+
+        <div class="profile-card__info">
+            <div class="profile-card__field">
+                <span class="profile-card__label">Name</span>
+                <span class="profile-card__value">{{ user.get_full_name|default:"—" }}</span>
+            </div>
+            <div class="profile-card__field">
+                <span class="profile-card__label">Email</span>
+                <span class="profile-card__value">{{ user.email }}</span>
+            </div>
+            <div class="profile-card__field">
+                <span class="profile-card__label">Phone</span>
+                <span class="profile-card__value">{{ user.phone|default:"—" }}</span>
+            </div>
+            <div class="profile-card__field">
+                <span class="profile-card__label">Role</span>
+                <span class="profile-card__value">{{ display_role }}</span>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="profile-actions__heading">Account actions</h3>
+    <div class="profile-actions">
+        <a href="#" class="profile-actions__link">Edit profile</a>
+        {% if user.is_staff %}
+        <a href="{% url 'reports:report' %}" class="profile-actions__link">Reports</a>
+        <a href="/admin/" class="profile-actions__link">Django Admin</a>
+        {% else %}
+            {% if user.role == "CLIENT" %}
+            <a href="{% url 'booking:create' %}" class="profile-actions__link">Book now</a>
+            {% endif %}
+            <a href="{% url 'booking:my_appointments' %}" class="profile-actions__link">My Appointments</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

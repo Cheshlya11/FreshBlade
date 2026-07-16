@@ -1,0 +1,117 @@
+.profile-page {
+  width: 100%;
+  max-width: 700px;
+}
+
+.profile-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.4rem;
+}
+
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+
+.profile-card__side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.avatar-circle {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  border-radius: 50%;
+  background: var(--avatar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--bg);
+}
+
+.profile-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.profile-card__field {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  border-bottom: 1px solid var(--surface-line);
+  padding-bottom: 0.6rem;
+}
+
+.profile-card__field:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.profile-card__label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.profile-card__value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.profile-card__edit {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.profile-card__edit:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.profile-actions__heading {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.profile-actions__link {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.profile-actions__link:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
