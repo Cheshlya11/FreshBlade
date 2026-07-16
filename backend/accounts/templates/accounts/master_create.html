@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Add Master — FreshBlade{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/master_create.css' %}">
+{% endblock %}
+{% block content %}
+<div class="master-creation-page">
+    <h1>Add a new master</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <h3>Account details</h3>
+        {% if user_form.non_field_errors %}
+        <div class="form-errors">
+            {% for error in user_form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <p class="{% if user_form.first_name.errors %}has-error{% endif %}">
+            <label for="{{ user_form.first_name.id_for_label }}">First name</label>
+            {{ user_form.first_name }}
+            {{ user_form.first_name.errors }}
+        </p>
+        <p class="{% if user_form.last_name.errors %}has-error{% endif %}">
+            <label for="{{ user_form.last_name.id_for_label }}">Last name</label>
+            {{ user_form.last_name }}
+            {{ user_form.last_name.errors }}
+        </p>
+        <p class="{% if user_form.email.errors %}has-error{% endif %}">
+            <label for="{{ user_form.email.id_for_label }}">Email</label>
+            {{ user_form.email }}
+            {{ user_form.email.errors }}
+        </p>
+        <p class="{% if user_form.phone.errors %}has-error{% endif %}">
+            <label for="{{ user_form.phone.id_for_label }}">Phone</label>
+            {{ user_form.phone }}
+            {{ user_form.phone.errors }}
+        </p>
+        <p class="{% if user_form.password.errors %}has-error{% endif %}">
+            <label for="{{ user_form.password.id_for_label }}">Password</label>
+            {{ user_form.password }}
+            {{ user_form.password.errors }}
+        </p>
+
+        <p class="{% if user_form.password.errors %}has-error{% endif %}">
+            <label for="{{ user_form.password.id_for_label }}">Confirm Password</label>
+            {{ user_form.password_confirm }}
+            {{ user_form.password_confirm.errors }}
+        </p>
+
+        <h3>Master profile</h3>
+        <p class="{% if master_form.short_description.errors %}has-error{% endif %}">
+            <label for="{{ master_form.short_description.id_for_label }}">Short description</label>
+            {{ master_form.short_description }}
+            {{ master_form.short_description.errors }}
+        </p>
+        <p class="{% if master_form.bio.errors %}has-error{% endif %}">
+            <label for="{{ master_form.bio.id_for_label }}">Bio</label>
+            {{ master_form.bio }}
+            {{ master_form.bio.errors }}
+        </p>
+        <p class="{% if master_form.experience_years.errors %}has-error{% endif %}">
+            <label for="{{ master_form.experience_years.id_for_label }}">Experience (years)</label>
+            {{ master_form.experience_years }}
+            {{ master_form.experience_years.errors }}
+        </p>
+        <p class="{% if master_form.photo.errors %}has-error{% endif %}">
+            <label for="{{ master_form.photo.id_for_label }}">Photo URL</label>
+            {{ master_form.photo }}
+            {{ master_form.photo.errors }}
+        </p>
+
+        <button type="submit">Continue to schedule</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+.master-creation-page {
+  width: 100%;
+  max-width: 600px;
+}
+
+.master-schedule-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.master-schedule-row__day {
+  width: 100px;
+}
+
+.master-schedule-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.master-schedule-actions button {
+  width: auto;
+  padding: 0.7rem 1.8rem;
+}
+
+.master-schedule-actions button[name="skip"] {
+  background: transparent;
+  border: 1px solid var(--surface-line);
+  color: var(--text-dim);
+}
+
+.master-schedule-actions button[name="skip"]:hover {
+  border-color: var(--surface-line);
+  color: var(--text);
+  filter: none;
+}
