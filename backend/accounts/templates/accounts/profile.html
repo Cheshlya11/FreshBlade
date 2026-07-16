@@ -39,7 +39,7 @@
 
     <h3 class="profile-actions__heading">Account actions</h3>
     <div class="profile-actions">
-        <a href="#" class="profile-actions__link">Edit profile</a>
+        <a href="{% url 'accounts:profile_edit' %}" class="profile-actions__link">Edit profile</a>
         {% if user.is_staff %}
         <a href="{% url 'reports:report' %}" class="profile-actions__link">Reports</a>
         <a href="/admin/" class="profile-actions__link">Django Admin</a>
