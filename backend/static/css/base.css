@@ -94,6 +94,32 @@ header {
   filter: brightness(1.08);
 }
 
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-dim);
+}
+
+.nav-profile:hover .nav-user {
+  color: var(--gold);
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: var(--avatar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--bg);
+}
+
 .nav-user {
   font-size: 0.9rem;
   color: var(--text-dim);
