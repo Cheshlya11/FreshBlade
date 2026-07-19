@@ -8,6 +8,7 @@ from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.core.exceptions import ValidationError
 
 from accounts.models import Master
 
@@ -59,13 +60,17 @@ def booking_create_view(request):
     if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            create_appointment(
-                client=request.user,
-                master=form.cleaned_data["master"],
-                service_list=form.cleaned_data["services"],
-                start_at=form.cleaned_data["start_at"],
-            )
-            return redirect("pages:home")
+            try:
+
+                create_appointment(
+                    client=request.user,
+                    master=form.cleaned_data["master"],
+                    service_list=form.cleaned_data["services"],
+                    start_at=form.cleaned_data["start_at"],
+                )
+                return redirect("pages:home")
+            except ValidationError as e:
+                form.add_error(None, e.message if hasattr(e, "message") else e.messages[0])
         return render(request, "booking/create.html", {"form": form, "today": today})
 
     preselected_service = request.GET.get("service")
